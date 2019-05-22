@@ -73,7 +73,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initData() {
-        mViewpager.setCurrentItem(2);
+
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(new BookFragment());
         fragmentList.add(new SearchFragment());
@@ -81,6 +81,7 @@ public class MainActivity extends FragmentActivity {
         fragmentList.add(new ImpressionFragment());
         mAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewpager.setAdapter(mAdapter);
+        mViewpager.setCurrentItem(2);
     }
 
     @OnClick({R.id.itv_book, R.id.itv_search, R.id.itv_add, R.id.itv_impression})

@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.mmc.bookhouse.R;
+import com.example.mmc.bookhouse.model.Book;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
+import com.example.mmc.bookhouse.utils.Toast;
 import com.example.mmc.bookhouse.utils.Tools;
 import com.example.mmc.bookhouse.view.TextItemView;
 
@@ -86,10 +88,19 @@ public class AddBookFragment extends BaseFragment {
        String times = mTivBookReadtimes.getContent();
 
        if(!Tools.notEmpty(name)){
-           Tools.toast("书名不能为空");
+           Toast.show("书名不能为空");
            return;
        }
-
+        Book book = new Book();
+       book.name = name;
+       book.author =author;
+       book.location = location;
+       book.desc =desc;
+       book.type = type;
+       book.tag=tag;
+       book.date =date;
+       book.times = times;
+       book.save();
 
     }
 

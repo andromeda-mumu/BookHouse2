@@ -1,5 +1,6 @@
 package com.example.mmc.bookhouse.ui.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,6 +29,9 @@ public abstract class BaseFragment extends Fragment {
         initView();
         initData();
         initListener();
+    }
+    public Activity activity(){
+        return getActivity();
     }
 
     protected void initView() {}
