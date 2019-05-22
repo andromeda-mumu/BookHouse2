@@ -9,6 +9,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //eventBus加速处理
+        javaCompileOptions {
+            annotationProcessorOptions{
+                arguments=[eventBusIndex:'com.yz.ui.fragmentdemo.MyEventBusIndex']
+            }
+        }
+
     }
     buildTypes {
         release {
@@ -42,6 +50,10 @@ dependencies {
 
     //recyclewView
     compile 'com.zhy:base-rvadapter:3.0.3'
+
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
 
 }
 tasks.withType(JavaCompile) {

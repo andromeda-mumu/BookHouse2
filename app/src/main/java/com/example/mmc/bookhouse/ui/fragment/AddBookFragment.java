@@ -9,10 +9,14 @@ import android.widget.ImageView;
 
 import com.example.mmc.bookhouse.R;
 import com.example.mmc.bookhouse.model.Book;
+import com.example.mmc.bookhouse.model.Event;
+import com.example.mmc.bookhouse.model.EventType;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
 import com.example.mmc.bookhouse.utils.Toast;
 import com.example.mmc.bookhouse.utils.Tools;
 import com.example.mmc.bookhouse.view.TextItemView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,7 +105,22 @@ public class AddBookFragment extends BaseFragment {
        book.date =date;
        book.times = times;
        book.save();
+        EventBus.getDefault().post(new Event(EventType.ADD_BOOK));
 
+        resetData();
+        Toast.show("添加成功");
+
+    }
+
+    private void resetData() {
+         mTivBookname.reset();
+         mTivBookauthor.reset();
+         mTivBookLocation.reset();
+         mTivBookDesc.reset();
+        mTivBookType.reset();
+        mTivBookTag.reset();
+         mTivBookDate.reset();
+         mTivBookReadtimes.reset();
     }
 
     @Override

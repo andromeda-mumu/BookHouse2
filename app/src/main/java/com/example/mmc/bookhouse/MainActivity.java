@@ -81,7 +81,7 @@ public class MainActivity extends FragmentActivity {
         fragmentList.add(new ImpressionFragment());
         mAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewpager.setAdapter(mAdapter);
-        mViewpager.setCurrentItem(2);
+        mViewpager.setOffscreenPageLimit(3);
     }
 
     @OnClick({R.id.itv_book, R.id.itv_search, R.id.itv_add, R.id.itv_impression})

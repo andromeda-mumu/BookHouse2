@@ -2,7 +2,7 @@ package com.example.mmc.bookhouse.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
 import com.example.mmc.bookhouse.utils.Tools;
@@ -15,7 +15,7 @@ import java.util.List;
  * 功能描述：
  */
 
-public class HomePagerAdapter extends FragmentPagerAdapter {
+public class HomePagerAdapter extends FragmentStatePagerAdapter {
     private List<BaseFragment> mDatas = new ArrayList();
     public HomePagerAdapter(FragmentManager fm,List<BaseFragment> list) {
         super(fm);
