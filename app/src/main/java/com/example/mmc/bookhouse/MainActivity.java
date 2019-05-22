@@ -73,6 +73,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initData() {
+        mViewpager.setCurrentItem(2);
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(new BookFragment());
         fragmentList.add(new SearchFragment());

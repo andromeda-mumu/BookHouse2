@@ -1,10 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="addBookFragment"
-    />
+    android:layout_height="match_parent" >
+   <ImageView android:layout_width="@dimen/dp_80" android:layout_height="@dimen/dp_120"
+        android:src="@drawable/upload"
+              android:layout_marginTop="@dimen/dp_10"
+              app:layout_constraintTop_toTopOf="parent"
+              android:background="@drawable/bg_border_drawable"
+              android:id="@+id/iv_upload"
+   />
 
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_bookname"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toRightOf="@+id/iv_upload"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:text="书名："
+                                              app:hint="请输入书名"
+ />
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_bookauthor"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toRightOf="@+id/iv_upload"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@id/tiv_bookname"
+                                              app:text="作者："
+                                              app:hint="请输入作者"
+ />
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_book_location"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toRightOf="@+id/iv_upload"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@id/tiv_bookauthor"
+                                              app:text="位置："
+                                              app:hint="请输入书籍所在处"
+ />
+
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_book_desc"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toLeftOf="parent"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@id/tiv_book_location"
+                                              app:text="描述："
+                                              app:hint="请输入书籍描述"
+ />
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_book_type"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toLeftOf="parent"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@id/tiv_book_desc"
+                                              app:text="分类："
+                                              app:hint="请选择书籍分类"
+ />
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_book_tag"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toLeftOf="parent"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@id/tiv_book_type"
+                                              app:text="标签："
+                                              app:hint="请选择书籍标签"
+ />
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_book_date"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toLeftOf="parent"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@id/tiv_book_tag"
+                                              app:text="日期："
+                                              app:hint="请选择日期"
+ />
+ <com.example.mmc.bookhouse.view.TextItemView android:layout_width="0dp"
+                                              android:id="@+id/tiv_book_readtimes"
+                                              android:layout_height="@dimen/dp_48"
+                                              app:layout_constraintLeft_toLeftOf="parent"
+                                              app:layout_constraintRight_toRightOf="parent"
+                                              app:layout_constraintTop_toBottomOf="@id/tiv_book_date"
+                                              app:text="几刷："
+                                              app:hint="请输入几次刷"
+ />
+
+ <Button android:layout_width="@dimen/dp_150" android:layout_height="@dimen/dp_45"
+         android:id="@+id/btn_upload"
+        android:background="@drawable/btn_selector"
+         android:text="添加"
+         android:textColor="@drawable/tv_btn_color_select"
+         android:textSize="@dimen/dp_25"
+         app:layout_constraintTop_toBottomOf="@+id/tiv_book_readtimes"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         android:layout_marginTop="@dimen/dp_45"
+ />
 </android.support.constraint.ConstraintLayout>

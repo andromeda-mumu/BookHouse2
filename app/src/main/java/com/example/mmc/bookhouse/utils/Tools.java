@@ -1,5 +1,10 @@
 package com.example.mmc.bookhouse.utils;
 
+import android.text.TextUtils;
+import android.widget.Toast;
+
+import com.example.mmc.bookhouse.app.BookApplication;
+
 /**
  * Created by wangjiao on 2019/5/22.
  * 功能描述：
@@ -7,10 +12,13 @@ package com.example.mmc.bookhouse.utils;
 
 public class Tools {
     public static boolean notNull(Object obj) {
-        if (obj != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return obj!=null;
+    }
+
+    public static boolean notEmpty(String str) {
+        return !TextUtils.isEmpty(str);
+    }
+    public static void toast(String msg){
+        Toast.makeText(BookApplication.mInstance,msg,Toast.LENGTH_SHORT);
     }
 }

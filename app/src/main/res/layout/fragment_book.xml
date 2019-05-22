@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="bookFragment"
-    />
+    <!--<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"-->
+        <!--android:text="bookFragment"-->
+    <!--/>-->
 
-</android.support.constraint.ConstraintLayout>
+    <com.example.mmc.bookhouse.view.TextItemView android:layout_width="match_parent"
+                                                 android:layout_height="wrap_content"
+                                                 app:text="书名"
+                                                 app:hint="请输入书名"
+
+    />
+    <com.example.mmc.bookhouse.view.TextItemView android:layout_width="match_parent"
+                                                 android:layout_height="wrap_content"
+                                                 app:text="书名"
+                                                 app:hint="请输入书名"
+
+    />
+</LinearLayout>

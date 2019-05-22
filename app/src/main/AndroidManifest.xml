@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".app.BookApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/orange_icon"
