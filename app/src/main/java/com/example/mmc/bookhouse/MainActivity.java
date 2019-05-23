@@ -25,8 +25,6 @@ import butterknife.OnClick;
 public class MainActivity extends FragmentActivity {
     @BindView(R.id.bottom)
     LinearLayout mBottom;
-    @BindView(R.id.view)
-    View mView;
     @BindView(R.id.viewpager)
     ViewPager mViewpager;
     @BindView(R.id.itv_book)

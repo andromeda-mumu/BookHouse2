@@ -1,58 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-
-
     <LinearLayout android:layout_width="match_parent"
-                  android:id="@+id/bottom"
-                  android:layout_height="@dimen/dp_65"
-                  android:orientation="horizontal"
-                  android:layout_alignParentBottom="true"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_gravity="bottom"
     >
-     <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
-                                                   android:id="@+id/itv_book"
-                                                   android:layout_weight="1"
-                                                   android:layout_height="match_parent"
-        app:name="书库"
-         app:image="@drawable/book_icon"
-     />
-     <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
-                                                   android:id="@+id/itv_search"
-                                                   android:layout_weight="1"
-                                                   android:layout_height="match_parent"
-        app:name="查找"
-         app:image="@drawable/search_icon"
-     />
-     <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
-                                                   android:id="@+id/itv_add"
-                                                   android:layout_weight="1"
-                                                   android:layout_height="match_parent"
-        app:name="添加"
-         app:image="@drawable/add_icon"
-     />
-     <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
-                                                   android:id="@+id/itv_impression"
-                                                   android:layout_weight="1"
-                                                   android:layout_height="match_parent"
-        app:name="读后感"
-         app:image="@drawable/edit_icon"
-     />
+        <View android:layout_width="match_parent" android:layout_height="@dimen/dp_1"
+              android:layout_above="@id/bottom"
+              android:id="@+id/view"
+              android:background="@color/colorPrimary"
+        />
+        <LinearLayout android:layout_width="match_parent"
+                      android:id="@+id/bottom"
+                      android:layout_marginTop="@dimen/dp_5"
+                      android:layout_height="@dimen/dp_65"
+                      android:orientation="horizontal"
+                      android:layout_alignParentBottom="true"
+
+        >
+            <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
+                                                          android:id="@+id/itv_book"
+                                                          android:layout_weight="1"
+                                                          android:layout_height="match_parent"
+                                                          app:name="书库"
+                                                          app:image="@drawable/book_icon"
+            />
+            <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
+                                                          android:id="@+id/itv_search"
+                                                          android:layout_weight="1"
+                                                          android:layout_height="match_parent"
+                                                          app:name="查找"
+                                                          app:image="@drawable/search_icon"
+            />
+            <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
+                                                          android:id="@+id/itv_add"
+                                                          android:layout_weight="1"
+                                                          android:layout_height="match_parent"
+                                                          app:name="添加"
+                                                          app:image="@drawable/add_icon"
+            />
+            <com.example.mmc.bookhouse.view.ImageTextView android:layout_width="0dp"
+                                                          android:id="@+id/itv_impression"
+                                                          android:layout_weight="1"
+                                                          android:layout_height="match_parent"
+                                                          app:name="读后感"
+                                                          app:image="@drawable/edit_icon"
+            />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <View android:layout_width="match_parent" android:layout_height="@dimen/dp_1"
-        android:layout_above="@id/bottom"
-          android:id="@+id/view"
-          android:background="@color/colorPrimary"
-    />
     <android.support.v4.view.ViewPager android:layout_width="match_parent"
                                        android:layout_height="match_parent"
                                        android:id="@+id/viewpager"
-                                       android:layout_above="@id/view"
+                                       android:layout_marginBottom="@dimen/dp_65"
     />
-</RelativeLayout>
+
+
+
+</FrameLayout>
