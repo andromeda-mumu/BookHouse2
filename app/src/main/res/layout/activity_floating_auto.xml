@@ -47,6 +47,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:theme="@style/Theme.ToolBar.ZhiHu"
                 app:title="toolbar_name"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
