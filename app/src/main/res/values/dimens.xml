@@ -20,4 +20,7 @@
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_12">12dp</dimen>
     <dimen name="dp_240">240dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
