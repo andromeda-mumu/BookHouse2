@@ -66,6 +66,10 @@ public class SearchAdapter extends BaseAdapter implements Filterable{
         return view;
     }
 
+    public List<Book> getData(){
+        return mBooks;
+    }
+
     @Override
     public Filter getFilter() {
         if(null==mMyFileter){

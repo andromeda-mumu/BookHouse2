@@ -11,5 +11,9 @@ public class Event {
     public Event(String type){
         this.eventType=type;
     }
+    public Event(String type,Object obj){
+        this.eventType = type;
+        this.mObject =obj;
+    }
 
 }

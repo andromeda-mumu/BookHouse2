@@ -7,11 +7,10 @@ import android.view.View;
 
 import com.example.mmc.bookhouse.R;
 import com.example.mmc.bookhouse.model.Book;
-import com.example.mmc.bookhouse.model.Book_Table;
 import com.example.mmc.bookhouse.model.ItemDelagateBean;
 import com.example.mmc.bookhouse.model.ItemDelagateType;
+import com.example.mmc.bookhouse.ui.activity.BookDetailActivity;
 import com.example.mmc.bookhouse.utils.Tools;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -43,28 +42,28 @@ public class BookItemDelegate implements ItemViewDelegate<ItemDelagateBean> {
         final List<Book> books = (List<Book>) itemDelagateBean.Object;
         if(Tools.isEmpty(books))return;
         RecyclerView rlv = holder.getView(R.id.rlv);
-        GridLayoutManager manager = new GridLayoutManager(mContext,4);
+        GridLayoutManager manager = new GridLayoutManager(mContext,3);
         rlv.setLayoutManager(manager);
         rlv.setAdapter(new CommonAdapter<Book>(mContext,R.layout.item_book,books){
             @Override
             protected void convert(ViewHolder holder, final Book book, final int position) {
                 holder.setText(R.id.tv_name,book.name);
                 holder.setText(R.id.tv_author,book.author);
+                holder.setText(R.id.tv_location,book.location);
                 holder.getConvertView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //删除
-                        SQLite.delete(Book.class)
-                                .where(Book_Table.name.eq(book.name))
-                                 .execute();
-                        books.remove(position);
-                        notifyItemRemoved(position);
+//                        //删除
+//                        SQLite.delete(Book.class)
+//                                .where(Book_Table.name.eq(book.name))
+//                                 .execute();
+//                        books.remove(position);
+//                        notifyItemRemoved(position);
+                        BookDetailActivity.start(mContext);
+
                     }
                 });
             }
         });
-
-
-
     }
 }

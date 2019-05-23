@@ -8,12 +8,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.mmc.bookhouse.adapter.HomePagerAdapter;
+import com.example.mmc.bookhouse.model.Event;
+import com.example.mmc.bookhouse.model.EventType;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
 import com.example.mmc.bookhouse.ui.fragment.AddBookFragment;
 import com.example.mmc.bookhouse.ui.fragment.BookFragment;
 import com.example.mmc.bookhouse.ui.fragment.ImpressionFragment;
 import com.example.mmc.bookhouse.ui.fragment.SearchFragment;
+import com.example.mmc.bookhouse.utils.EventBusUtils;
 import com.example.mmc.bookhouse.view.ImageTextView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +42,15 @@ public class MainActivity extends FragmentActivity {
     @BindView(R.id.itv_impression)
     ImageTextView mItvImpression;
     private HomePagerAdapter mAdapter;
+    private SearchFragment mSearchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBusUtils.register(this);
+
         initView();
         initData();
         initListener();
@@ -74,7 +83,8 @@ public class MainActivity extends FragmentActivity {
 
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(new BookFragment());
-        fragmentList.add(new SearchFragment());
+        mSearchFragment = new SearchFragment();
+        fragmentList.add(mSearchFragment);
         fragmentList.add(new AddBookFragment());
         fragmentList.add(new ImpressionFragment());
         mAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
@@ -129,5 +139,22 @@ public class MainActivity extends FragmentActivity {
         mItvAdd.selectStatus(false);
         mItvImpression.selectStatus(false);
         selectView.selectStatus(true);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void event(Event event){
+        switch (event.eventType){
+            case EventType.MORE_TYPE_BOOK:
+                String type = (String) event.mObject;
+                mSearchFragment.loadTypeData(type);
+                mViewpager.setCurrentItem(1);
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBusUtils.unregister(this);
     }
 }
