@@ -8,13 +8,15 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.mmc.bookhouse.ui.activity.FloatingActivityAuto">
 
+    <!--appbarLayout包裹着全部能固定的控件-->
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <!--collapsingToolbarLayout包裹着可以折叠的控件-->
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
@@ -23,30 +25,73 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
-            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:src="@drawable/book_cover"
-            />
+            <!--这一块是完全可以自定义的-->
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:src="@drawable/book_cover"
+                />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="自定义名字"
+                />
+                <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:background="@drawable/btn_normal_shape"
+                        android:text="按钮"
+                />
+            </LinearLayout>
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="book"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="toolbar_name"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
+
+        <!--这里是底部自定义的-->
+        <!-- <include layout="@layout/content_floating_activity_auto"/>-->
+
+        <android.support.design.widget.TabLayout android:layout_width="match_parent"
+                                                 android:layout_height="?attr/actionBarSize"
+                                                 android:background="#ffffff"
+                                                 android:fillViewport="false"
+                                                 app:layout_scrollFlags="scroll"
+                                                 app:tabIndicatorColor="#0835f8"
+                                                 app:tabIndicatorHeight="2.0dp"
+                                                 app:tabSelectedTextColor="#0835f8"
+                                                 app:tabTextColor="#ced0d3"
+        >
+            <android.support.design.widget.TabItem android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:text="A"/>
+            <android.support.design.widget.TabItem android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:text="B"/>
+            <android.support.design.widget.TabItem android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:text="C"/>
+
+
+        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_floating_activity_auto"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+    <!--在appbarLayout外部的是，自己写的控件,比如详情-->
+    <android.support.v4.view.ViewPager android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:id="@+id/viewpager"
+                                       android:background="@color/white"
+                                       app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--app:layout_anchor="@id/app_bar"-->
+        <!--app:layout_anchorGravity="bottom|end"-->
+        <!--app:srcCompat="@android:drawable/ic_dialog_email"/>-->
 
 </android.support.design.widget.CoordinatorLayout>
