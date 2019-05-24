@@ -6,12 +6,15 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by wangjiao on 2019/5/22.
  * 功能描述：
  */
 @Table(database = BookDatabase.class)
-public class Book extends BaseModel{
+public class Book extends BaseModel implements Serializable{
+    private static final long serialVersionUID = 4902038122965537667L;
     @PrimaryKey(autoincrement = true)
     public int id;
     @Column

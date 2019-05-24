@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_FFE9CCA7"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.mmc.bookhouse.ui.activity.BookDetailActivity"
+    tools:showIn="@layout/activity_book_detail">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+        <TextView android:layout_width="match_parent" android:layout_height="@dimen/dp_45"
+                  android:id="@+id/tv_tag"
+                  android:layout_below="@id/tv_location"
+                  android:text="标签 标签 标签"
+                  android:textSize="@dimen/dp_15"
+                  android:drawableLeft="@drawable/tag_cion"
+                  android:paddingLeft="@dimen/dp_20"
+                  android:gravity="center_vertical"
+                  android:drawablePadding="@dimen/dp_5"
+                  android:background="@color/white"
+        />
+        <TextView android:layout_width="match_parent" android:layout_height="@dimen/dp_45"
+                  android:id="@+id/tv_date"
+                  android:layout_below="@id/tv_tag"
+                  android:text="购书日期：20180522"
+                  android:textSize="@dimen/dp_15"
+                  android:paddingLeft="@dimen/dp_20"
+                  android:layout_marginTop="@dimen/dp_3"
+                  android:drawableLeft="@drawable/date_icon"
+                  android:background="@color/white"
+                  android:gravity="center_vertical"
+                  android:drawablePadding="@dimen/dp_5"
+        />
+        <TextView android:layout_width="match_parent" android:layout_height="@dimen/dp_45"
+                  android:id="@+id/tv_times"
+                  android:layout_below="@id/tv_date"
+                  android:text="频率"
+                  android:textSize="@dimen/dp_15"
+                  android:paddingLeft="@dimen/dp_20"
+                  android:layout_marginTop="@dimen/dp_3"
+                  android:drawableLeft="@drawable/times_icon"
+                  android:background="@color/white"
+                  android:gravity="center_vertical"
+                  android:drawablePadding="@dimen/dp_5"
+        />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/tv_times_log"
+                  android:layout_below="@+id/tv_times"
+                  android:background="@color/white"
+                  android:paddingLeft="@dimen/dp_20"
+                  android:text="小鸣：一刷\n夏暮：一刷"
+        />
+        <TextView android:layout_width="match_parent" android:layout_height="@dimen/dp_45"
+                  android:id="@+id/tv_note"
+                  android:layout_below="@+id/tv_times_log"
+                  android:text="读书感悟"
+                  android:textSize="@dimen/dp_15"
+                  android:paddingLeft="@dimen/dp_20"
+                  android:layout_marginTop="@dimen/dp_3"
+                  android:drawableLeft="@drawable/note_icon"
+                  android:gravity="center_vertical"
+                  android:drawablePadding="@dimen/dp_5"
+                  android:background="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_note"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:background="@color/white"
+        android:text="@string/large_text"/>
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -11,7 +11,9 @@ import com.example.mmc.bookhouse.R;
 import com.example.mmc.bookhouse.model.Book;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
+import com.example.mmc.bookhouse.ui.activity.BookDetailActivity;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
+import com.example.mmc.bookhouse.utils.EventBusUtils;
 import com.example.mmc.bookhouse.utils.Toast;
 import com.example.mmc.bookhouse.utils.Tools;
 import com.example.mmc.bookhouse.view.TextItemView;
@@ -29,6 +31,8 @@ import butterknife.Unbinder;
  */
 
 public class AddBookFragment extends BaseFragment {
+    public static final int ADD_BOOK =1;
+    public static final int EDIT_BOOK =2;
     @BindView(R.id.iv_upload)
     ImageView mIvUpload;
     @BindView(R.id.tiv_bookname)
@@ -50,10 +54,11 @@ public class AddBookFragment extends BaseFragment {
     @BindView(R.id.btn_upload)
     Button mBtnUpload;
     Unbinder unbinder;
+    private int mType =ADD_BOOK;
+    private Book mOldBook;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
@@ -64,16 +69,16 @@ public class AddBookFragment extends BaseFragment {
         return R.layout.fragment_book_add;
     }
 
-    @Override
-    protected void initData() {
-
-    }
 
     @OnClick(R.id.btn_upload)
     public void onClick(View view){
         switch(view.getId()){
             case R.id.btn_upload:
-                doUpload();
+                if(mType==ADD_BOOK) {
+                    doUpload();
+                }else{
+                    doEdit();
+                }
                 break;
             default :
                 break;
@@ -81,7 +86,7 @@ public class AddBookFragment extends BaseFragment {
         }
     }
 
-    private void doUpload() {
+   private Book preCheck(){
        String name = mTivBookname.getContent();
        String author = mTivBookauthor.getContent();
        String location = mTivBookLocation.getContent();
@@ -93,9 +98,14 @@ public class AddBookFragment extends BaseFragment {
 
        if(!Tools.notEmpty(name)){
            Toast.show("书名不能为空");
-           return;
+           return null;
        }
-        Book book = new Book();
+       Book book;
+       if(mType==ADD_BOOK){
+            book = new Book();
+       }else{
+           book = mOldBook;
+       }
        book.name = name;
        book.author =author;
        book.location = location;
@@ -104,15 +114,21 @@ public class AddBookFragment extends BaseFragment {
        book.tag=tag;
        book.date =date;
        book.times = times;
-       book.save();
-        EventBus.getDefault().post(new Event(EventType.ADD_BOOK));
+       return book;
+   }
 
+
+    private void doUpload() {
+        Book book = preCheck();
+        if(book==null)return;
+        book.save();
+        EventBus.getDefault().post(new Event(EventType.UPDATE_BOOK));
         resetData();
         Toast.show("添加成功");
-
     }
 
     private void resetData() {
+        mBtnUpload.setText("确认添加");
          mTivBookname.reset();
          mTivBookauthor.reset();
          mTivBookLocation.reset();
@@ -121,6 +137,30 @@ public class AddBookFragment extends BaseFragment {
         mTivBookTag.reset();
          mTivBookDate.reset();
          mTivBookReadtimes.reset();
+
+    }
+
+    public void editBook(Book book){
+        mBtnUpload.setText("确认修改");
+        mOldBook = book;
+        mType = EDIT_BOOK;
+        mTivBookname.setContent(book.name);
+        mTivBookauthor.setContent(book.author);
+        mTivBookLocation.setContent(book.location);
+        mTivBookDesc.setContent(book.desc);
+        mTivBookType.setContent(book.type);
+        mTivBookTag.setContent(book.tag);
+        mTivBookDate.setContent(book.date);
+        mTivBookReadtimes.setContent(book.times);
+    }
+    private void doEdit() {
+        Book book = preCheck();
+        if(book == null)return;
+        book.update();
+        Toast.show("已修改成功");
+        resetData();
+        BookDetailActivity.start(activity(),book);
+        EventBusUtils.post(EventType.UPDATE_BOOK);
     }
 
     @Override

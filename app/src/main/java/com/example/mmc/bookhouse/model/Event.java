@@ -7,13 +7,13 @@ package com.example.mmc.bookhouse.model;
 
 public class Event {
     public String eventType;
-    public Object mObject;
+    public Object object;
     public Event(String type){
         this.eventType=type;
     }
     public Event(String type,Object obj){
         this.eventType = type;
-        this.mObject =obj;
+        this.object =obj;
     }
 
 }

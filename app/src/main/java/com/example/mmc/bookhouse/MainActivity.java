@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.mmc.bookhouse.adapter.HomePagerAdapter;
+import com.example.mmc.bookhouse.model.Book;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends FragmentActivity {
     ImageTextView mItvImpression;
     private HomePagerAdapter mAdapter;
     private SearchFragment mSearchFragment;
+    private AddBookFragment mAddBookFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +87,8 @@ public class MainActivity extends FragmentActivity {
         fragmentList.add(new BookFragment());
         mSearchFragment = new SearchFragment();
         fragmentList.add(mSearchFragment);
-        fragmentList.add(new AddBookFragment());
+        mAddBookFragment = new AddBookFragment();
+        fragmentList.add(mAddBookFragment);
         fragmentList.add(new ImpressionFragment());
         mAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewpager.setAdapter(mAdapter);
@@ -145,9 +148,14 @@ public class MainActivity extends FragmentActivity {
     public void event(Event event){
         switch (event.eventType){
             case EventType.MORE_TYPE_BOOK:
-                String type = (String) event.mObject;
+                String type = (String) event.object;
                 mSearchFragment.loadTypeData(type);
                 mViewpager.setCurrentItem(1);
+                break;
+            case EventType.EDIT_BOOK:
+                Book book = (Book) event.object;
+                mAddBookFragment.editBook(book);
+                mViewpager.setCurrentItem(2);
                 break;
         }
     }

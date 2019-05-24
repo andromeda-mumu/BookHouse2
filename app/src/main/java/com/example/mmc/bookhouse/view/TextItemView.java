@@ -58,6 +58,10 @@ public class TextItemView extends LinearLayout {
         }
     }
 
+    public void setContent(String content){
+        mEt.setText(content);
+    }
+
     public String getContent(){
       return  mEt.getText().toString().trim();
     }

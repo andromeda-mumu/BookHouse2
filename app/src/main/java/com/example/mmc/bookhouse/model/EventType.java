@@ -8,5 +8,8 @@ package com.example.mmc.bookhouse.model;
 public class EventType {
     public static final String ADD_BOOK ="add_book";
     public static final String MORE_TYPE_BOOK ="more_type_book";
+    public static final String EDIT_BOOK ="edit_book";
+    public static final String UPDATE_BOOK ="update_book";
+
 
 }

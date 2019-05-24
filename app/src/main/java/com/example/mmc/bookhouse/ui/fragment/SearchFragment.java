@@ -76,7 +76,7 @@ public class SearchFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = (Book) mAdapter.getItem(i);
                 if (Tools.notNull(book)) {
-                    BookDetailActivity.start(activity());
+                    BookDetailActivity.start(getActivity(),book);
                 }
             }
         });

@@ -7,7 +7,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mmc.bookhouse.R;
@@ -99,11 +98,11 @@ public class FloatingActivityAuto extends AppCompatActivity {
 
 
     //这会自动加到toolbar上
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.base_toolbar_menu,menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.base_toolbar_menu,menu);
+//        return true;
+//    }
 
 
     private void initView() {

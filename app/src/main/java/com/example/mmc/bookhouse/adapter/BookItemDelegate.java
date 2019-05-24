@@ -59,8 +59,7 @@ public class BookItemDelegate implements ItemViewDelegate<ItemDelagateBean> {
 //                                 .execute();
 //                        books.remove(position);
 //                        notifyItemRemoved(position);
-                        BookDetailActivity.start(mContext);
-
+                        BookDetailActivity.start(mContext,book);
                     }
                 });
             }

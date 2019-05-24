@@ -72,8 +72,6 @@ public class BookFragment extends BaseFragment {
 
     }
 
-
-
     private void loadDb() {
         for (String type : types) {
             mDatas.add(new ItemDelagateBean(ItemDelagateType.item_type, type));
@@ -100,7 +98,7 @@ public class BookFragment extends BaseFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Event event) {
         switch (event.eventType) {
-            case EventType.ADD_BOOK:
+            case EventType.UPDATE_BOOK:
                 mDatas.clear();
                 loadDb();
                 mAdapter.notifyDataSetChanged();
