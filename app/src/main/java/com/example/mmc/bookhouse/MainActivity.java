@@ -9,14 +9,18 @@ import android.widget.LinearLayout;
 
 import com.example.mmc.bookhouse.adapter.HomePagerAdapter;
 import com.example.mmc.bookhouse.model.Book;
+import com.example.mmc.bookhouse.model.BookType;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
+import com.example.mmc.bookhouse.model.SharePref;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
 import com.example.mmc.bookhouse.ui.fragment.AddBookFragment;
 import com.example.mmc.bookhouse.ui.fragment.BookFragment;
 import com.example.mmc.bookhouse.ui.fragment.ImpressionFragment;
 import com.example.mmc.bookhouse.ui.fragment.SearchFragment;
 import com.example.mmc.bookhouse.utils.EventBusUtils;
+import com.example.mmc.bookhouse.utils.ScreenUtils;
+import com.example.mmc.bookhouse.utils.SharePreferentUtils;
 import com.example.mmc.bookhouse.view.ImageTextView;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -45,17 +49,34 @@ public class MainActivity extends FragmentActivity {
     private HomePagerAdapter mAdapter;
     private SearchFragment mSearchFragment;
     private AddBookFragment mAddBookFragment;
-
+    private String[] mTypes ={"技术","文学","传记","历史","管理","外文","绘画","其他"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         EventBusUtils.register(this);
+        ScreenUtils.init(this);
 
         initView();
         initData();
+        initTypeTable();
         initListener();
+    }
+
+    /**
+     * 数据库的图书类型表
+     */
+    private void initTypeTable() {
+        boolean newApp = SharePreferentUtils.getBoolean(SharePref.NEW_APP);
+        if(!newApp)return;
+
+        for (int i=mTypes.length;i>=0;i--){
+            BookType bookType = new BookType();
+            bookType.type =mTypes[i];
+            bookType.save();
+        }
+        SharePreferentUtils.putBoolean(SharePref.NEW_APP,true);
     }
 
     private void initListener() {

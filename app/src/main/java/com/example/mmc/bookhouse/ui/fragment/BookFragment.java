@@ -11,6 +11,7 @@ import com.example.mmc.bookhouse.R;
 import com.example.mmc.bookhouse.adapter.BookItemDelegate;
 import com.example.mmc.bookhouse.adapter.TypeItemDelagate;
 import com.example.mmc.bookhouse.model.Book;
+import com.example.mmc.bookhouse.model.BookType;
 import com.example.mmc.bookhouse.model.Book_Table;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
@@ -41,7 +42,6 @@ public class BookFragment extends BaseFragment {
     RecyclerView mRlv;
     Unbinder unbinder;
     private List<ItemDelagateBean> mDatas = new ArrayList();
-    private String[] types = {"技术类", "历史类", "人文类", "科幻类", "其他"};
     private MultiItemTypeAdapter mAdapter;
 
     @Override
@@ -73,26 +73,23 @@ public class BookFragment extends BaseFragment {
     }
 
     private void loadDb() {
-        for (String type : types) {
-            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_type, type));
-            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_book, getTypeBook(type)));
+        List<BookType> bookTypes = SQLite.select()
+                .from(BookType.class)
+                .queryList();
+
+
+        for (BookType bookType :bookTypes) {
+            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_type, bookType.type));
+            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_book, getTypeBook(bookType.type)));
         }
     }
 
     public List<Book> getTypeBook(String type) {
-        if (types[4].equals(type)) {
-            List<Book> books = SQLite.select()
-                    .from(Book.class)
-                    .where(Book_Table.type.isNot(types[0]), Book_Table.type.isNot(types[1]), Book_Table.type.isNot(types[2]), Book_Table.type.isNot(types[3]))
-                    .queryList();
-            return books;
-        } else {
-            List<Book> books = SQLite.select()
-                    .from(Book.class)
-                    .where(Book_Table.type.is(type))
-                    .queryList();
-            return books;
-        }
+        List<Book> books = SQLite.select()
+                .from(Book.class)
+                .where(Book_Table.type.like(type+"%"))
+                .queryList();
+        return books;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

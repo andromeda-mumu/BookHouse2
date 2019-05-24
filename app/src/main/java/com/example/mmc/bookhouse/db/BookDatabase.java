@@ -9,5 +9,5 @@ import com.raizlabs.android.dbflow.annotation.Database;
 
 @Database(version  = BookDatabase.VERSION)
 public class BookDatabase {
-    public static final int VERSION =1;
+    public static final int VERSION =3;
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+>
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+               android:id="@+id/iv_close"
+        android:src="@drawable/close"
+               android:layout_gravity="right"
+               android:paddingTop="@dimen/dp_15"
+               android:paddingRight="@dimen/dp_20"
+               android:paddingLeft="@dimen/dp_20"
+    />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="请添加书籍类型"
+              android:layout_gravity="center_horizontal"
+              android:textSize="@dimen/dp_15"
+    />
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/et"
+        android:background="@drawable/bg_gray_stroke_shape"
+              android:hint="请输入"
+              android:layout_margin="@dimen/dp_20"
+              android:padding="@dimen/dp_10"
+              android:textSize="@dimen/dp_15"
+    />
+
+    <Button android:layout_width="wrap_content" android:layout_height="@dimen/dp_30"
+        android:text="提交"
+            android:id="@+id/btn_submit"
+            android:background="@drawable/btn_selector"
+            android:textColor="@drawable/tv_btn_color_select"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp_5"
+    />
+</LinearLayout>
