@@ -58,9 +58,9 @@ public class MainActivity extends FragmentActivity {
         EventBusUtils.register(this);
         ScreenUtils.init(this);
 
+        initTypeTable();
         initView();
         initData();
-        initTypeTable();
         initListener();
     }
 
@@ -68,15 +68,15 @@ public class MainActivity extends FragmentActivity {
      * 数据库的图书类型表
      */
     private void initTypeTable() {
-        boolean newApp = SharePreferentUtils.getBoolean(SharePref.NEW_APP);
+        boolean newApp = SharePreferentUtils.getBoolean(SharePref.NEW_APP,true);
         if(!newApp)return;
 
-        for (int i=mTypes.length;i>=0;i--){
+        for (int i=mTypes.length-1;i>=0;i--){
             BookType bookType = new BookType();
             bookType.type =mTypes[i];
             bookType.save();
         }
-        SharePreferentUtils.putBoolean(SharePref.NEW_APP,true);
+        SharePreferentUtils.putBoolean(SharePref.NEW_APP,false);
     }
 
     private void initListener() {

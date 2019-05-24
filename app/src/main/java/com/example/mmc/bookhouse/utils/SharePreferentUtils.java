@@ -15,8 +15,8 @@ public class SharePreferentUtils {
     public static void putBoolean(String name,boolean value){
         sp.edit().putBoolean(name,value).apply();
     }
-    public static boolean getBoolean(String name){
-       return sp.getBoolean(name,false);
+    public static boolean getBoolean(String name,boolean def){
+       return sp.getBoolean(name,def);
     }
 
 }

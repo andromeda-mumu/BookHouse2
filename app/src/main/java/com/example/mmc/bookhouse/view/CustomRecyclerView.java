@@ -9,7 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.mmc.bookhouse.R;
@@ -35,7 +35,7 @@ public class CustomRecyclerView extends RecyclerView {
     private int downX;
     private int downY;
     // 当前处理的item的LayoutParams
-    private LinearLayout.LayoutParams mLayoutParams;
+    private RelativeLayout.LayoutParams mLayoutParams;
     private int mMargin;
     private int mTouchSlop;
 
@@ -91,7 +91,7 @@ public class CustomRecyclerView extends RecyclerView {
         tvTitle = itemView.findViewById(R.id.tv_title);
         //2、获取删除按钮的宽度
         tvDeleteWidth = tvDelete.getLayoutParams().width;
-        mLayoutParams = (LinearLayout.LayoutParams) tvTitle.getLayoutParams();
+        mLayoutParams = (RelativeLayout.LayoutParams) tvTitle.getLayoutParams();
         mLayoutParams.width = screenWidth;
         mLayoutParams.leftMargin = -mMargin;
         tvTitle.setLayoutParams(mLayoutParams);
@@ -136,7 +136,7 @@ public class CustomRecyclerView extends RecyclerView {
     }
     public void backToNormal(){
         //重新设置第一个childView的左边距
-        mLayoutParams.leftMargin = -mMargin+ScreenUtils.dip2px(getContext(),21);
+        mLayoutParams.leftMargin = -mMargin+ScreenUtils.dip2px(getContext(),34);
         tvTitle.setLayoutParams(mLayoutParams);
         isDeleteShow = false;
     }
