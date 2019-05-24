@@ -4,16 +4,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.mmc.bookhouse.R;
+import com.example.mmc.bookhouse.adapter.RecyclerViewDeleteAdapter;
 import com.example.mmc.bookhouse.model.BookType;
 import com.example.mmc.bookhouse.utils.ScreenUtils;
+import com.example.mmc.bookhouse.view.CustomRecyclerView;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +28,15 @@ import butterknife.OnClick;
 
 public class SelectTypeDialog extends Dialog {
     @BindView(R.id.rlv)
-    RecyclerView mRlv;
+    CustomRecyclerView mRlv;
     @BindView(R.id.tv_add_type)
     TextView mTvAddType;
     private List<BookType> mDatas = new ArrayList();
     private Context mContext;
-    private CommonAdapter mAdapter;
+//    private CommonAdapter mAdapter;
     private OnSelectListener mListener;
+    private RecyclerViewDeleteAdapter mAdapter;
+
     public SelectTypeDialog(@NonNull Context context,OnSelectListener listener) {
         super(context);
         this.mContext = context;
@@ -58,22 +59,24 @@ public class SelectTypeDialog extends Dialog {
 
         LinearLayoutManager manager = new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false);
         mRlv.setLayoutManager(manager);
-        mAdapter = new CommonAdapter<BookType>(mContext, R.layout.item_search,mDatas){
+//        mAdapter = new CommonAdapter<BookType>(mContext, R.layout.item_search,mDatas){
+//
+//            @Override
+//            protected void convert(ViewHolder holder, final BookType bookType, int position) {
+//                holder.setText(R.id.tv_name,bookType.type);
+//                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if(mListener!=null){
+//                            mListener.onSelect(bookType.type);
+//                            dismiss();
+//                        }
+//                    }
+//                });
+//            }
+//        };
 
-            @Override
-            protected void convert(ViewHolder holder, final BookType bookType, int position) {
-                holder.setText(R.id.tv_name,bookType.type);
-                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(mListener!=null){
-                            mListener.onSelect(bookType.type);
-                            dismiss();
-                        }
-                    }
-                });
-            }
-        };
+        mAdapter = new RecyclerViewDeleteAdapter(mContext,mRlv,mDatas);
         mRlv.setAdapter(mAdapter);
     }
 
