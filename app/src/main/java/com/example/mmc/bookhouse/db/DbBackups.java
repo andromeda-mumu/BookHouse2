@@ -45,14 +45,14 @@ public class DbBackups extends AsyncTask<String, Void, Integer> {
 
     @Override
     protected Integer doInBackground(String... params) {
-        // 需要备份的数据库路径
-        File dbFile = new File(Constant.DB_PATH, "BookDatabase.db");
-        // 创建数据库目录路径 */DoorsDb/*.db
-        File exportDir = new File(COPY_PATH, "CopyBookHouse");
+        //内存存储中数据库的位置
+        File dbFile = new File(Constant.DB_PATH, "BookDatabase_1.db");
+        File exportDir = new File(COPY_PATH, "CopyBookHouse");//sd卡放数据库备份文件的位置
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
-        File backup = new File(exportDir, dbFile.getName());
+//        File backup = new File(exportDir, dbFile.getName());
+        File backup = new File(exportDir, "city.db");
         String command = params[0];
         if (command.equals(COMMAND_BACKUP)) {
             try {
@@ -76,10 +76,16 @@ public class DbBackups extends AsyncTask<String, Void, Integer> {
         }
     }
 
-    private void fileCopy(File dbFile, File backup) throws IOException {
-//        InputStream ins = myContext.getClass().getClassLoader().getResourceAsStream("assets/" + "BookDatabase.db");
-        InputStream ins = new FileInputStream(dbFile);
-        OutputStream outs = new FileOutputStream(backup);
+    /**
+     * 备份的时候：把data下的数据库文件写入sd卡中
+     * 还原的时候：把sd卡的数据库文件写入data/data/pgm/databases下
+     * @throws IOException
+     */
+    private void fileCopy(File read, File out) throws IOException {
+//        InputStream ins = myContext.getClass().getClassLoader().getResourceAsStream("assets/" + "city.db");
+//        Log.d("=mmc=","----dbFile----"+dbFile.getAbsolutePath());
+        InputStream ins = new FileInputStream(read);
+        OutputStream outs = new FileOutputStream(out);
         byte[] buffer = new byte[1024];
         int length;
         while ((length=ins.read(buffer))>0){

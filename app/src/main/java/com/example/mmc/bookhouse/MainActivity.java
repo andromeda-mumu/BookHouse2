@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -19,6 +20,7 @@ import com.example.mmc.bookhouse.model.BookType;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
 import com.example.mmc.bookhouse.model.SharePref;
+import com.example.mmc.bookhouse.model.m_city;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
 import com.example.mmc.bookhouse.ui.fragment.AddBookFragment;
 import com.example.mmc.bookhouse.ui.fragment.BookFragment;
@@ -29,6 +31,7 @@ import com.example.mmc.bookhouse.utils.ScreenUtils;
 import com.example.mmc.bookhouse.utils.SharePreferentUtils;
 import com.example.mmc.bookhouse.utils.Toast;
 import com.example.mmc.bookhouse.view.ImageTextView;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -76,7 +79,7 @@ public class MainActivity extends FragmentActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},SD_PERM);
         }else{
-            backUp();
+            backUp(DbBackups.COMMAND_RESTORE);
         }
     }
 
@@ -85,7 +88,7 @@ public class MainActivity extends FragmentActivity {
         switch (requestCode){
             case SD_PERM:
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                     backUp();
+                     backUp(DbBackups.COMMAND_RESTORE);
                 }else{
                     Toast.show("请开启权限");
                     checkPermission();
@@ -97,8 +100,8 @@ public class MainActivity extends FragmentActivity {
     /**
      * 备份数据库
      */
-    private void backUp() {
-        new DbBackups(getApplicationContext()).execute(DbBackups.COMMAND_BACKUP);
+    private void backUp(String type) {
+        new DbBackups(getApplicationContext()).execute(type);
     }
 
     /**
@@ -126,9 +129,9 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 viewpagerSelect(position);
-                if(position==2){
-                    checkPermission();
-                }
+
+                testBackup(position);
+
             }
 
             @Override
@@ -136,6 +139,34 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+    }
+
+    /**
+     * 测试备份和还原
+     * @param position
+     */
+    private void testBackup(int position) {
+        //先用外部存储的DB写入内存存储 ----->还原
+        if(position==2){
+            checkPermission();
+        }
+        if(position==3) {
+            List<m_city> list = SQLite.select()
+                    .from(m_city.class)
+                    .queryList();
+            int cid = 0;
+            for (m_city city : list) {
+                Log.d("=mmc=", "--------" + city.cname);
+                cid = city.cid;
+            }
+            m_city ci = new m_city();
+            ci.cid = cid+1;
+            ci.cname = "慢慢学";
+
+            ci.save();
+            //添加了数据，重新备份到SD卡中-----》备份
+            backUp(DbBackups.COMMAND_BACKUP);
+        }
     }
 
     private void initView() {

@@ -26,4 +26,5 @@ public class BookApplication extends Application {
 
         Stetho.initializeWithDefaults(this);
     }
+
 }
