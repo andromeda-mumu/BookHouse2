@@ -76,7 +76,7 @@ public class SelectTypeDialog extends Dialog {
 //            }
 //        };
 
-        mAdapter = new RecyclerViewDeleteAdapter(mContext,mRlv,mDatas);
+        mAdapter = new RecyclerViewDeleteAdapter(mContext, mRlv, mDatas, mListener);
         mRlv.setAdapter(mAdapter);
     }
 
@@ -96,5 +96,6 @@ public class SelectTypeDialog extends Dialog {
 
     public interface OnSelectListener{
         void onSelect(String type);
+//        void onDelete(String type);
     }
 }

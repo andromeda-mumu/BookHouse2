@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.mmc.bookhouse.R;
 import com.example.mmc.bookhouse.model.BookType;
 import com.example.mmc.bookhouse.view.CustomRecyclerView;
+import com.example.mmc.bookhouse.view.dialog.SelectTypeDialog;
 
 import java.util.List;
 
@@ -22,10 +23,12 @@ public class RecyclerViewDeleteAdapter extends RecyclerView.Adapter<RecyclerView
     private Context mContext;
     private List<BookType> dataList;
     private CustomRecyclerView recyclerView;
-    public RecyclerViewDeleteAdapter(Context mContext, CustomRecyclerView recyclerView, List<BookType> dataList){
+    private SelectTypeDialog.OnSelectListener mSelectListener;
+    public RecyclerViewDeleteAdapter(Context mContext, CustomRecyclerView recyclerView, List<BookType> dataList,SelectTypeDialog.OnSelectListener listener){
         this.mContext = mContext;
         this.dataList = dataList;
         this.recyclerView = recyclerView;
+        this.mSelectListener = listener;
     }
 
     @Override
@@ -36,10 +39,18 @@ public class RecyclerViewDeleteAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewDeleteAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewDeleteAdapter.MyViewHolder holder, final int position) {
         final  int itemPosition = position;
         holder.tvTitle.setText(dataList.get(position).type+position);
         //给删除按钮设置点击事件的监听器
+        holder.tvTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mSelectListener!=null){
+                    mSelectListener.onSelect(dataList.get(position).type);
+                }
+            }
+        });
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +63,8 @@ public class RecyclerViewDeleteAdapter extends RecyclerView.Adapter<RecyclerView
                 //更新数据
                 notifyItemRemoved(itemPosition);
                 notifyItemRangeRemoved(itemPosition,getItemCount() - itemPosition);
+
+
                 //notifyDataSetChanged();//更新数据
             }
         });
@@ -72,3 +85,4 @@ public class RecyclerViewDeleteAdapter extends RecyclerView.Adapter<RecyclerView
         }
     }
 }
+

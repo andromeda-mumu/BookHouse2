@@ -63,6 +63,7 @@ public class AddBookFragment extends BaseFragment implements SelectTypeDialog.On
     ImageView mIvType;
     private int mType = ADD_BOOK;
     private Book mOldBook;
+    private SelectTypeDialog mSelectTypeDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,8 +89,8 @@ public class AddBookFragment extends BaseFragment implements SelectTypeDialog.On
                 }
                 break;
             case R.id.iv_type:
-                SelectTypeDialog dialog = new SelectTypeDialog(activity(),this);
-                dialog.show();
+                mSelectTypeDialog = new SelectTypeDialog(activity(),this);
+                mSelectTypeDialog.show();
                 break;
             default:
                 break;
@@ -188,5 +189,8 @@ public class AddBookFragment extends BaseFragment implements SelectTypeDialog.On
     @Override
     public void onSelect(String type) {
         mTvType.setText(type+"类");
+        if(mSelectTypeDialog.isShowing()){
+            mSelectTypeDialog.dismiss();
+        }
     }
 }

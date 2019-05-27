@@ -11,6 +11,7 @@ public class EventType {
     public static final String EDIT_BOOK ="edit_book";
     public static final String UPDATE_BOOK ="update_book";
     public static final String ADD_TYPE_SUC ="add_type_suc";
+    public static final String SELECT_TYPE ="select_type";
 
 
 }

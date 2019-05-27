@@ -1,13 +1,19 @@
 package com.example.mmc.bookhouse;
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.mmc.bookhouse.adapter.HomePagerAdapter;
+import com.example.mmc.bookhouse.db.DbBackups;
 import com.example.mmc.bookhouse.model.Book;
 import com.example.mmc.bookhouse.model.BookType;
 import com.example.mmc.bookhouse.model.Event;
@@ -21,6 +27,7 @@ import com.example.mmc.bookhouse.ui.fragment.SearchFragment;
 import com.example.mmc.bookhouse.utils.EventBusUtils;
 import com.example.mmc.bookhouse.utils.ScreenUtils;
 import com.example.mmc.bookhouse.utils.SharePreferentUtils;
+import com.example.mmc.bookhouse.utils.Toast;
 import com.example.mmc.bookhouse.view.ImageTextView;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends FragmentActivity {
+    private static final int SD_PERM =1001 ;
     @BindView(R.id.bottom)
     LinearLayout mBottom;
     @BindView(R.id.viewpager)
@@ -64,6 +72,35 @@ public class MainActivity extends FragmentActivity {
         initListener();
     }
 
+    private void checkPermission() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},SD_PERM);
+        }else{
+            backUp();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case SD_PERM:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                     backUp();
+                }else{
+                    Toast.show("请开启权限");
+                    checkPermission();
+                }
+                break;
+        }
+    }
+
+    /**
+     * 备份数据库
+     */
+    private void backUp() {
+        new DbBackups(getApplicationContext()).execute(DbBackups.COMMAND_BACKUP);
+    }
+
     /**
      * 数据库的图书类型表
      */
@@ -89,6 +126,9 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 viewpagerSelect(position);
+                if(position==2){
+                    checkPermission();
+                }
             }
 
             @Override
