@@ -11,7 +11,7 @@ import com.example.mmc.bookhouse.R;
 import com.example.mmc.bookhouse.adapter.BookItemDelegate;
 import com.example.mmc.bookhouse.adapter.TypeItemDelagate;
 import com.example.mmc.bookhouse.model.Book;
-import com.example.mmc.bookhouse.model.BookType;
+import com.example.mmc.bookhouse.model.BookType_2;
 import com.example.mmc.bookhouse.model.Book_Table;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
@@ -73,12 +73,12 @@ public class BookFragment extends BaseFragment {
     }
 
     private void loadDb() {
-        List<BookType> bookTypes = SQLite.select()
-                .from(BookType.class)
+        List<BookType_2> bookTypes = SQLite.select()
+                .from(BookType_2.class)
                 .queryList();
 
 
-        for (BookType bookType :bookTypes) {
+        for (BookType_2 bookType :bookTypes) {
             mDatas.add(new ItemDelagateBean(ItemDelagateType.item_type, bookType.type));
             mDatas.add(new ItemDelagateBean(ItemDelagateType.item_book, getTypeBook(bookType.type)));
         }

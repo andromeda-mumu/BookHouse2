@@ -75,7 +75,7 @@ public class MainActivity extends FragmentActivity {
         initView();
         initData();
         initListener();
-        sqlToExcel();
+//        sqlToExcel();
         excelToSql();
     }
 
@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity {
         new ExcelToSQLite
                 .Builder(this)
                                 .setDataBase(getDatabasePath("BookDatabase.db").getPath())
-                .setAssetFileName("user.xls")
+                .setAssetFileName("book.xls")
                 //                .setFilePath(outputFile)
                 .setDecryptKey("1234567")
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")

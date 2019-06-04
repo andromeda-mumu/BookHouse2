@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.sql.migration.AlterTableMigration;
  * 功能描述：$end$
  */
 
-@Migration(version =2,database = BookDatabase.class)
+@Migration(version =3,database = BookDatabase.class)
 public class Migration2 extends AlterTableMigration<Book> {
     public Migration2(Class<Book> table) {
         super(table);
