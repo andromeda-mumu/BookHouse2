@@ -41,7 +41,7 @@ public class RecyclerViewDeleteAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerViewDeleteAdapter.MyViewHolder holder, final int position) {
         final  int itemPosition = position;
-        holder.tvTitle.setText(dataList.get(position).type+position);
+        holder.tvTitle.setText(dataList.get(position).type);
         //给删除按钮设置点击事件的监听器
         holder.tvTitle.setOnClickListener(new View.OnClickListener() {
             @Override

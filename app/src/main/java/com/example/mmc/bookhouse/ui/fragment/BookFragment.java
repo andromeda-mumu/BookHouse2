@@ -11,7 +11,8 @@ import com.example.mmc.bookhouse.R;
 import com.example.mmc.bookhouse.adapter.BookItemDelegate;
 import com.example.mmc.bookhouse.adapter.TypeItemDelagate;
 import com.example.mmc.bookhouse.model.Book;
-import com.example.mmc.bookhouse.model.BookType_2;
+import com.example.mmc.bookhouse.model.BookType;
+import com.example.mmc.bookhouse.model.BookType_Table;
 import com.example.mmc.bookhouse.model.Book_Table;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
@@ -73,14 +74,16 @@ public class BookFragment extends BaseFragment {
     }
 
     private void loadDb() {
-        List<BookType_2> bookTypes = SQLite.select()
-                .from(BookType_2.class)
+        List<BookType> bookTypes = SQLite.select()
+                .from(BookType.class)
+                .orderBy(BookType_Table.id.desc())
                 .queryList();
 
 
-        for (BookType_2 bookType :bookTypes) {
+        for (BookType bookType :bookTypes) {
             mDatas.add(new ItemDelagateBean(ItemDelagateType.item_type, bookType.type));
-            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_book, getTypeBook(bookType.type)));
+            List<Book> typeBook = getTypeBook(bookType.type);
+            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_book, typeBook));
         }
     }
 
@@ -89,6 +92,9 @@ public class BookFragment extends BaseFragment {
                 .from(Book.class)
                 .where(Book_Table.type.like(type+"%"))
                 .queryList();
+        for (Book book:books){
+            String name = book.name;
+        }
         return books;
     }
 

@@ -97,6 +97,7 @@ public class CustomRecyclerView extends RecyclerView {
         tvTitle.setLayoutParams(mLayoutParams);
     }
     private boolean doActionMove(MotionEvent e) {
+        if (mLayoutParams==null)return true;
         //计算偏移量
         int scrollX = (int)(e.getX() - downX);
         int scrollY = (int) (e.getY() - downY);
@@ -123,6 +124,7 @@ public class CustomRecyclerView extends RecyclerView {
 
     }
     private void doActionUp() {
+        if(mLayoutParams==null)return;
         // 偏移量大于按钮尺寸的一半，则显示
         if(-mLayoutParams.leftMargin >= tvDeleteWidth / 2+mMargin) {
             mLayoutParams.leftMargin = -(tvDeleteWidth+mMargin)+ScreenUtils.dip2px(getContext(),10);
@@ -135,6 +137,7 @@ public class CustomRecyclerView extends RecyclerView {
         tvTitle.setLayoutParams(mLayoutParams);
     }
     public void backToNormal(){
+        if(mLayoutParams==null)return;
         //重新设置第一个childView的左边距
         mLayoutParams.leftMargin = -mMargin+ScreenUtils.dip2px(getContext(),34);
         tvTitle.setLayoutParams(mLayoutParams);

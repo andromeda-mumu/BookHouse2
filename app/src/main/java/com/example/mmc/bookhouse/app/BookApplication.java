@@ -25,6 +25,9 @@ public class BookApplication extends Application {
         FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
 
         Stetho.initializeWithDefaults(this);
+
+
+
     }
 
 }

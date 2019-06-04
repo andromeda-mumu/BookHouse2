@@ -31,7 +31,7 @@ public class TypeItemDelagate implements ItemViewDelegate<ItemDelagateBean> {
     public void convert(ViewHolder holder, ItemDelagateBean itemDelagateBean, int position) {
         final String type = (String) itemDelagateBean.Object;
         if(Tools.isEmpty(type))return;
-        holder.setText(R.id.tv_type,type);
+        holder.setText(R.id.tv_type,type+"---"+position);
         String str = type.replace("类","");
         holder.setText(R.id.tv_more,"更多"+str);
         holder.getView(R.id.tv_more).setOnClickListener(new View.OnClickListener() {

@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import com.example.mmc.bookhouse.adapter.HomePagerAdapter;
 import com.example.mmc.bookhouse.db.DbBackups;
 import com.example.mmc.bookhouse.model.Book;
-import com.example.mmc.bookhouse.model.BookType;
 import com.example.mmc.bookhouse.model.Event;
 import com.example.mmc.bookhouse.model.EventType;
 import com.example.mmc.bookhouse.model.SharePref;
@@ -27,6 +26,7 @@ import com.example.mmc.bookhouse.ui.fragment.SearchFragment;
 import com.example.mmc.bookhouse.utils.EventBusUtils;
 import com.example.mmc.bookhouse.utils.ScreenUtils;
 import com.example.mmc.bookhouse.utils.SharePreferentUtils;
+import com.example.mmc.bookhouse.utils.SqliteAndXlsUtils;
 import com.example.mmc.bookhouse.utils.Toast;
 import com.example.mmc.bookhouse.view.ImageTextView;
 
@@ -66,7 +66,9 @@ public class MainActivity extends FragmentActivity {
         EventBusUtils.register(this);
         ScreenUtils.init(this);
 
-        initTypeTable();
+
+        checkPermission();
+
         initView();
         initData();
 //        initListener();
@@ -78,7 +80,8 @@ public class MainActivity extends FragmentActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},SD_PERM);
         }else{
-            backUp(DbBackups.COMMAND_RESTORE);
+//            backUp(DbBackups.COMMAND_RESTORE);
+            initTypeTable();
         }
     }
 
@@ -87,7 +90,8 @@ public class MainActivity extends FragmentActivity {
         switch (requestCode){
             case SD_PERM:
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                     backUp(DbBackups.COMMAND_RESTORE);
+//                     backUp(DbBackups.COMMAND_RESTORE);
+                    initTypeTable();
                 }else{
                     Toast.show("请开启权限");
                     checkPermission();
@@ -110,11 +114,15 @@ public class MainActivity extends FragmentActivity {
         boolean newApp = SharePreferentUtils.getBoolean(SharePref.NEW_APP,true);
         if(!newApp)return;
 
-        for (int i=mTypes.length-1;i>=0;i--){
-            BookType bookType = new BookType();
-            bookType.type =mTypes[i];
-            bookType.save();
-        }
+//        for (int i=mTypes.length-1;i>=0;i--){
+//            BookType bookType = new BookType();
+//            bookType.type =mTypes[i];
+//            bookType.save();
+//        }
+        //第一次进入app导入xls文档
+        SqliteAndXlsUtils.excelToSqlite();
+
+
         SharePreferentUtils.putBoolean(SharePref.NEW_APP,false);
     }
 
