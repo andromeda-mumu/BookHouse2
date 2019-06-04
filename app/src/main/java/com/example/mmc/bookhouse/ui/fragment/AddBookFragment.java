@@ -188,7 +188,7 @@ public class AddBookFragment extends BaseFragment implements SelectTypeDialog.On
 
     @Override
     public void onSelect(String type) {
-        mTvType.setText(type+"类");
+        mTvType.setText(type);
         if(mSelectTypeDialog.isShowing()){
             mSelectTypeDialog.dismiss();
         }

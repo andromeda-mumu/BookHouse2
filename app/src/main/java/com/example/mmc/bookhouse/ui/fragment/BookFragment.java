@@ -82,19 +82,15 @@ public class BookFragment extends BaseFragment {
 
         for (BookType bookType :bookTypes) {
             mDatas.add(new ItemDelagateBean(ItemDelagateType.item_type, bookType.type));
-            List<Book> typeBook = getTypeBook(bookType.type);
-            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_book, typeBook));
+            mDatas.add(new ItemDelagateBean(ItemDelagateType.item_book, getTypeBook(bookType.type)));
         }
     }
 
     public List<Book> getTypeBook(String type) {
         List<Book> books = SQLite.select()
                 .from(Book.class)
-                .where(Book_Table.type.like(type+"%"))
+                .where(Book_Table.type.is(type))
                 .queryList();
-        for (Book book:books){
-            String name = book.name;
-        }
         return books;
     }
 
