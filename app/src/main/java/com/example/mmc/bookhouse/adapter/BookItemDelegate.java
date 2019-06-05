@@ -3,6 +3,7 @@ package com.example.mmc.bookhouse.adapter;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.example.mmc.bookhouse.R;
@@ -10,7 +11,6 @@ import com.example.mmc.bookhouse.model.Book;
 import com.example.mmc.bookhouse.model.ItemDelagateBean;
 import com.example.mmc.bookhouse.model.ItemDelagateType;
 import com.example.mmc.bookhouse.ui.activity.BookDetailActivity;
-import com.example.mmc.bookhouse.utils.Tools;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -24,7 +24,10 @@ import java.util.List;
 
 public class BookItemDelegate implements ItemViewDelegate<ItemDelagateBean> {
     private Context mContext;
+    private RecyclerView mRlv;
+
     public BookItemDelegate(Context context){
+        Log.d("=mmc=","----book create----");
         mContext =context;
     }
     @Override
@@ -40,11 +43,10 @@ public class BookItemDelegate implements ItemViewDelegate<ItemDelagateBean> {
     @Override
     public void convert(ViewHolder holder, ItemDelagateBean itemDelagateBean, int position) {
         final List<Book> books = (List<Book>) itemDelagateBean.Object;
-        if(Tools.isEmpty(books))return;
-        RecyclerView rlv = holder.getView(R.id.rlv);
+        mRlv = holder.getView(R.id.rlv);
         GridLayoutManager manager = new GridLayoutManager(mContext,3);
-        rlv.setLayoutManager(manager);
-        rlv.setAdapter(new CommonAdapter<Book>(mContext,R.layout.item_book,books){
+        mRlv.setLayoutManager(manager);
+        mRlv.setAdapter(new CommonAdapter<Book>(mContext,R.layout.item_book,books){
             @Override
             protected void convert(ViewHolder holder, final Book book, final int position) {
                 holder.setText(R.id.tv_name,book.name);
