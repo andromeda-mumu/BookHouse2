@@ -7,11 +7,11 @@
 >
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="从xls中导入数据"
-            android:onClick="doImport"
+            android:id="@+id/btn_import"
     />
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="从sql中备份xls数据"
-            android:onClick="doExport"
+            android:id="@+id/export"
     />
 
 </LinearLayout>
