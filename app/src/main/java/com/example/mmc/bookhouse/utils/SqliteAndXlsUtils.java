@@ -38,10 +38,12 @@ public class SqliteAndXlsUtils  {
                     public void onCompleted(String result) {
                         Log.d("=mmc=","Import completed--->" + result);
                         //                        showDbMsg(result);
+                        Toast.show("导入成功："+result);
                     }
 
                     @Override
                     public void onError(Exception e) {
+                        Toast.show("请从文件夹中bookhouse目录下导入book.xls文件");
                         Log.d("=mmc=","-----error---"+e.getMessage());
                     }
                 });
@@ -67,6 +69,7 @@ public class SqliteAndXlsUtils  {
                     @Override
                     public void onCompleted(String filePath) {
                         Log.d("=mmc=", "Export completed--->" + filePath);
+                        Toast.show("保存在："+filePath);
                     }
 
                     @Override
