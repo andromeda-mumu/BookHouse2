@@ -4,6 +4,7 @@ package com.example.mmc.bookhouse;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -33,6 +34,7 @@ import com.example.mmc.bookhouse.view.ImageTextView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +56,7 @@ public class MainActivity extends FragmentActivity {
     ImageTextView mItvAdd;
     @BindView(R.id.itv_impression)
     ImageTextView mItvImpression;
+    public static String OUTPATH = Environment.getExternalStorageDirectory().getPath()+"/bookhouse/";
     private HomePagerAdapter mAdapter;
     private SearchFragment mSearchFragment;
     private AddBookFragment mAddBookFragment;
@@ -74,6 +77,12 @@ public class MainActivity extends FragmentActivity {
 //        initListener();
     }
 
+    private void createDir() {
+        File file = new File(OUTPATH);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+    }
 
 
     private void checkPermission() {
@@ -108,9 +117,10 @@ public class MainActivity extends FragmentActivity {
     }
 
     /**
-     * 数据库的图书类型表
+     * 第一次从外部录入数据到sql
      */
     private void initTypeTable() {
+        createDir();
         boolean newApp = SharePreferentUtils.getBoolean(SharePref.NEW_APP,true);
         if(!newApp)return;
 

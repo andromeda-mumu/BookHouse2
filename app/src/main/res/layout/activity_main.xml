@@ -48,7 +48,7 @@
                                                           android:id="@+id/itv_impression"
                                                           android:layout_weight="1"
                                                           android:layout_height="match_parent"
-                                                          app:name="读后感"
+                                                          app:name="备份"
                                                           app:image="@drawable/edit_icon"
             />
 

@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.mmc.bookhouse.MainActivity;
 import com.example.mmc.bookhouse.app.BookApplication;
 import com.liyu.sqlitetoexcel.ExcelToSQLite;
 import com.liyu.sqlitetoexcel.SQLiteToExcel;
@@ -23,8 +24,8 @@ public class SqliteAndXlsUtils  {
         new ExcelToSQLite
                 .Builder(BookApplication.mInstance)
                 .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
-                .setAssetFileName("book.xls")
-                //                .setFilePath(outputFile)
+//                .setAssetFileName("book.xls")
+                .setFilePath(MainActivity.OUTPATH+"/book.xls")
                 .setDecryptKey("1234567")
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .start(new ExcelToSQLite.ImportListener() {
@@ -54,7 +55,8 @@ public class SqliteAndXlsUtils  {
     public static void sqliteToExcel(){
         new SQLiteToExcel.Builder(BookApplication.mInstance)
                 .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
-                .setTables("BookType")
+                .setOutputPath(MainActivity.OUTPATH)
+//                .setTables("BookType")
                 //                .setEncryptKey("1234567")
                 //                .setProtectKey("9876543")
                 .start(new SQLiteToExcel.ExportListener() {
