@@ -83,7 +83,7 @@ public class SelectTypeDialog extends Dialog implements OnItemClickListener {
     public void onClick(View view){
         switch(view.getId()){
             case R.id.tv_add_type:
-                AddTypeDialog dialog = new AddTypeDialog(mContext);
+                AddTypeDialog dialog = new AddTypeDialog(mContext,mListener);
                 dialog.show();
                 dismiss();
                 break;

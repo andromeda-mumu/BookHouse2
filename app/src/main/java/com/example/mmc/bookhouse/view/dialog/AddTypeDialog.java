@@ -27,9 +27,11 @@ public class AddTypeDialog extends Dialog {
     EditText mEt;
     @BindView(R.id.btn_submit)
     Button mBtnSubmit;
+    private SelectTypeDialog.OnSelectListener mListener;
 
-    public AddTypeDialog(@NonNull Context context) {
+    public AddTypeDialog(@NonNull Context context,SelectTypeDialog.OnSelectListener listener) {
         super(context);
+        this.mListener = listener;
         setCancelable(true);
         setCanceledOnTouchOutside(true);
         setContentView(R.layout.dialog_add_type);
@@ -55,6 +57,9 @@ public class AddTypeDialog extends Dialog {
 
     private void submitType() {
         String newType = mEt.getText().toString().trim();
+        if(mListener!=null){
+            mListener.onSelect(newType);
+        }
         if(Tools.notEmpty(newType)){
             Toast.show("添加成功");
             BookType bookType= new BookType();
