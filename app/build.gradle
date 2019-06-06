@@ -27,38 +27,30 @@ android {
 }
 def dbFlow_version = "4.2.4"
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-
     //butterknife
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
     //dbflow 数据库
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbFlow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbFlow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbFlow_version}"
-
     //神器，查看数据库
     compile 'com.facebook.stetho:stetho:1.3.1'
-
     //recyclewView
     compile 'com.zhy:base-rvadapter:3.0.3'
-
     //eventbus
     implementation 'org.greenrobot:eventbus:3.1.1'
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
-
     //sqlite To excel
-    compile 'com.liyu.tools:sqlitetoexcel:1.0.8'
-
-
+    //    compile 'com.liyu.tools:sqlitetoexcel:1.0.8'
+    implementation project(':sqlitetoexcel')
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"

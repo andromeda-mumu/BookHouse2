@@ -19,6 +19,7 @@ import com.example.mmc.bookhouse.model.EventType;
 import com.example.mmc.bookhouse.model.ItemDelagateBean;
 import com.example.mmc.bookhouse.model.ItemDelagateType;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
+import com.example.mmc.bookhouse.utils.Toast;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
@@ -98,6 +99,7 @@ public class BookFragment extends BaseFragment {
     public void onEvent(Event event) {
         switch (event.eventType) {
             case EventType.UPDATE_BOOK:
+                Toast.show("update");
                 mDatas.clear();
                 loadDb();
                 mAdapter.notifyDataSetChanged();

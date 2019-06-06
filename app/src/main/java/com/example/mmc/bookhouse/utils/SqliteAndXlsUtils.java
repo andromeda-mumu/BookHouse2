@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.mmc.bookhouse.MainActivity;
 import com.example.mmc.bookhouse.app.BookApplication;
+import com.example.mmc.bookhouse.model.EventType;
 import com.example.mmc.bookhouse.model.SharePref;
 import com.liyu.sqlitetoexcel.ExcelToSQLite;
 import com.liyu.sqlitetoexcel.SQLiteToExcel;
@@ -40,13 +41,13 @@ public class SqliteAndXlsUtils  {
                         //                        showDbMsg(result);
                         Toast.show("导入成功："+result);
                         SharePreferentUtils.putBoolean(SharePref.IMPORT_DATA,true);
+                        EventBusUtils.post(EventType.UPDATE_BOOK);
                     }
 
                     @Override
                     public void onError(Exception e) {
                         Toast.show("请从"+fromFilePath+"目录下导入文件");
                         Log.d("=mmc=","-----error---"+e.getMessage());
-                        SharePreferentUtils.putBoolean(SharePref.IMPORT_DATA,false);
                     }
                 });
     }
@@ -61,7 +62,10 @@ public class SqliteAndXlsUtils  {
                 .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
                 .setOutputPath(MainActivity.OUTPATH)
                 .setOutputFileName("book_backup.xls")
-                .setTables("bookType","book")
+//                .setTables("Book")
+//                .setSQL("Book","select * from Book")
+//                .setTables("BookType")
+//                .setSQL("BookType","select * from BookType")
                 //                .setEncryptKey("1234567")
                 //                .setProtectKey("9876543")
                 .start(new SQLiteToExcel.ExportListener() {
@@ -72,6 +76,36 @@ public class SqliteAndXlsUtils  {
                     @Override
                     public void onCompleted(String filePath) {
                         Toast.show("保存在："+filePath);
+                        EventBusUtils.post(EventType.UPDATE_BOOK);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                    }
+                });
+
+//       saveTable("Book","select * from Book");
+//       saveTable("BookType","select * from BookType");
+    }
+
+    public static void saveTable(String tableName,String sql){
+        new SQLiteToExcel.Builder(BookApplication.mInstance)
+                .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
+                .setOutputPath(MainActivity.OUTPATH)
+                .setOutputFileName("book_backup.xls")
+                .setTables("Book")
+                .setSQL(tableName,sql)
+                //                .setEncryptKey("1234567")
+                //                .setProtectKey("9876543")
+                .start(new SQLiteToExcel.ExportListener() {
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onCompleted(String filePath) {
+                        Toast.show("保存在："+filePath);
+                        EventBusUtils.post(EventType.UPDATE_BOOK);
                     }
 
                     @Override

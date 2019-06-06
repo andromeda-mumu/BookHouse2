@@ -1,7 +1,6 @@
 package com.example.mmc.bookhouse.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,9 +107,12 @@ public class AddBookFragment extends BaseFragment implements SelectTypeDialog.On
         String date = mTivBookDate.getContent();
         String times = mTivBookReadtimes.getContent();
         String type = mTvType.getText().toString();
-        Log.d("=mmc=","----type----"+type);
-        if (!Tools.notEmpty(name)) {
+        if (Tools.isEmpty(name)) {
             Toast.show("书名不能为空");
+            return null;
+        }
+        if(Tools.isEmpty(type)){
+            Toast.show("请选择图书类型");
             return null;
         }
         Book book;
