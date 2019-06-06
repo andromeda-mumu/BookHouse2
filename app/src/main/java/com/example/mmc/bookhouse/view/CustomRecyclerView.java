@@ -53,6 +53,7 @@ public class CustomRecyclerView extends RecyclerView {
         mMargin = (ScreenUtils.ScreenWidth-screenWidth)/2;
         //滑动到最小距离
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        mTouchSlop = 0;
         Log.d("=mmc=","----mTouchSlop----"+mTouchSlop);
 
     }
@@ -65,7 +66,8 @@ public class CustomRecyclerView extends RecyclerView {
                 doActionDown(e);
                 break;
             case MotionEvent.ACTION_MOVE:
-                return doActionMove(e);
+                doActionMove(e);
+                break;
             case MotionEvent.ACTION_UP:
                 doActionUp();
                 break;
@@ -97,7 +99,6 @@ public class CustomRecyclerView extends RecyclerView {
         tvTitle.setLayoutParams(mLayoutParams);
     }
     private boolean doActionMove(MotionEvent e) {
-        if (mLayoutParams==null)return true;
         //计算偏移量
         int scrollX = (int)(e.getX() - downX);
         int scrollY = (int) (e.getY() - downY);
@@ -124,7 +125,6 @@ public class CustomRecyclerView extends RecyclerView {
 
     }
     private void doActionUp() {
-        if(mLayoutParams==null)return;
         // 偏移量大于按钮尺寸的一半，则显示
         if(-mLayoutParams.leftMargin >= tvDeleteWidth / 2+mMargin) {
             mLayoutParams.leftMargin = -(tvDeleteWidth+mMargin)+ScreenUtils.dip2px(getContext(),10);
