@@ -62,7 +62,7 @@ public class SqliteAndXlsUtils  {
                 .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
                 .setOutputPath(MainActivity.OUTPATH)
                 .setOutputFileName("book_backup.xls")
-//                .setTables("Book")
+                .setTables("Book","BookType")
 //                .setSQL("Book","select * from Book")
 //                .setTables("BookType")
 //                .setSQL("BookType","select * from BookType")

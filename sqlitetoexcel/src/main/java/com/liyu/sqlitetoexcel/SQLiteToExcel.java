@@ -150,7 +150,8 @@ public class SQLiteToExcel {
             if (tables == null || tables.size() == 0) {
                 tables = getTablesName(database);
             }
-            return exportTables(getTablesName(database), fileName);
+            return exportTables(tables, fileName);
+//            return exportTables(getTablesName(database), fileName);
         } catch (Exception e) {
             if (database != null && database.isOpen()) {
                 database.close();
@@ -176,7 +177,8 @@ public class SQLiteToExcel {
                     if (tables == null || tables.size() == 0) {
                         tables = getTablesName(database);
                     }
-                    final String filePath = exportTables(getTablesName(database), fileName);
+                    final String filePath = exportTables(tables, fileName);
+//                    final String filePath = exportTables(getTablesName(database), fileName);
                     if (listener != null) {
                         handler.post(new Runnable() {
                             @Override
@@ -209,6 +211,7 @@ public class SQLiteToExcel {
         this.filePath = filePath;
         this.sql = sql;
         this.sheetName = sheetName;
+        this.tables = tables;
 
         try {
             database = SQLiteDatabase.openOrCreateDatabase(dataBaseName, null);
@@ -309,14 +312,14 @@ public class SQLiteToExcel {
      */
     private List<String> getTablesName(SQLiteDatabase database) {
         List<String> tables = new ArrayList<>();
-//        Cursor cursor = database.rawQuery("select name from sqlite_master where type='table' order by name", null);
-//        while (cursor.moveToNext()) {
-//            tables.add(cursor.getString(0));
-//        }
-//        cursor.close();
+        Cursor cursor = database.rawQuery("select name from sqlite_master where type='table' order by name", null);
+        while (cursor.moveToNext()) {
+            tables.add(cursor.getString(0));
+        }
+        cursor.close();
 
-        tables.add("Book");
-        tables.add("BookType");
+//        tables.add("Book");
+//        tables.add("BookType");
         return tables;
     }
 
