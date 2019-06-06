@@ -5,13 +5,46 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 >
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="tip: 从文件夹下的/bookhouse/book.xls中录入数据到app内"
+              android:id="@+id/tv_import"
+              android:padding="@dimen/dp_10"
+              android:textSize="@dimen/dp_15"
+    />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="从xls中导入数据"
+            android:text="导入原数据（book.xls）"
             android:id="@+id/btn_import"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/btn_selector"
+            android:textColor="@drawable/tv_btn_color_select"
+            android:layout_gravity="center_horizontal"
+    />
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="导入备份数据（book_backup.xls）"
+                android:id="@+id/btn_import_two"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/btn_selector"
+                android:textColor="@drawable/tv_btn_color_select"
+                android:layout_gravity="center_horizontal"
+        />
+    </LinearLayout>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/tv_export"
+              android:text="tip: 将app内部新添加的数据备份到文件夹下/bookhouse目录下，方便以后导入"
+              android:padding="@dimen/dp_10"
+              android:textSize="@dimen/dp_15"
     />
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="从sql中备份xls数据"
+            android:text="备份数据"
             android:id="@+id/export"
+            android:background="@drawable/btn_selector"
+            android:textColor="@drawable/tv_btn_color_select"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_gravity="center_horizontal"
     />
+
+
 
 </LinearLayout>

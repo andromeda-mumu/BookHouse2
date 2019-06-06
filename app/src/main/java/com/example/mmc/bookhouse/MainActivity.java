@@ -56,7 +56,7 @@ public class MainActivity extends FragmentActivity {
     ImageTextView mItvAdd;
     @BindView(R.id.itv_impression)
     ImageTextView mItvImpression;
-    public static String OUTPATH = Environment.getExternalStorageDirectory().getPath()+"/bookhouse/";
+    public static String OUTPATH = Environment.getExternalStorageDirectory().getPath()+"/bookhouse";
     private HomePagerAdapter mAdapter;
     private SearchFragment mSearchFragment;
     private AddBookFragment mAddBookFragment;
@@ -121,19 +121,13 @@ public class MainActivity extends FragmentActivity {
      */
     private void initTypeTable() {
         createDir();
-        boolean newApp = SharePreferentUtils.getBoolean(SharePref.NEW_APP,true);
-        if(!newApp)return;
+        boolean importDataSuc = SharePreferentUtils.getBoolean(SharePref.IMPORT_DATA,false);
+        if(importDataSuc)return;
 
-//        for (int i=mTypes.length-1;i>=0;i--){
-//            BookType bookType = new BookType();
-//            bookType.type =mTypes[i];
-//            bookType.save();
-//        }
         //第一次进入app导入xls文档
-        SqliteAndXlsUtils.excelToSqlite();
+        SqliteAndXlsUtils.excelToSqlite(ImpressionFragment.ORIGIN_FILE_PATH);
 
-
-        SharePreferentUtils.putBoolean(SharePref.NEW_APP,false);
+//        SharePreferentUtils.putBoolean(SharePref.NEW_APP,false);
     }
 
     private void initListener() {
@@ -147,7 +141,6 @@ public class MainActivity extends FragmentActivity {
             public void onPageSelected(int position) {
                 viewpagerSelect(position);
 
-                testBackup(position);
 
             }
 

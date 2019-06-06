@@ -6,5 +6,5 @@ package com.example.mmc.bookhouse.model;
  */
 
 public class SharePref {
-    public static final String NEW_APP="new_app";
+    public static final String IMPORT_DATA="import_data";
 }

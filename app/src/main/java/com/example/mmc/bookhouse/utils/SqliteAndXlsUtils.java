@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.mmc.bookhouse.MainActivity;
 import com.example.mmc.bookhouse.app.BookApplication;
+import com.example.mmc.bookhouse.model.SharePref;
 import com.liyu.sqlitetoexcel.ExcelToSQLite;
 import com.liyu.sqlitetoexcel.SQLiteToExcel;
 
@@ -20,31 +21,32 @@ public class SqliteAndXlsUtils  {
      * xls->sql
      * 外部excel表格转换成sqlite数据
      */
-    public static void excelToSqlite(){
+    public static void excelToSqlite(final String fromFilePath){
         new ExcelToSQLite
                 .Builder(BookApplication.mInstance)
                 .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
 //                .setAssetFileName("book.xls")
-                .setFilePath(MainActivity.OUTPATH+"/book.xls")
+//                .setFilePath(MainActivity.OUTPATH+"/book.xls")
+                .setFilePath(fromFilePath)
                 .setDecryptKey("1234567")
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .start(new ExcelToSQLite.ImportListener() {
                     @Override
                     public void onStart() {
-                        Log.d("=mmc=","----start----");
                     }
 
                     @Override
                     public void onCompleted(String result) {
-                        Log.d("=mmc=","Import completed--->" + result);
                         //                        showDbMsg(result);
                         Toast.show("导入成功："+result);
+                        SharePreferentUtils.putBoolean(SharePref.IMPORT_DATA,true);
                     }
 
                     @Override
                     public void onError(Exception e) {
-                        Toast.show("请从文件夹中bookhouse目录下导入book.xls文件");
+                        Toast.show("请从"+fromFilePath+"目录下导入文件");
                         Log.d("=mmc=","-----error---"+e.getMessage());
+                        SharePreferentUtils.putBoolean(SharePref.IMPORT_DATA,false);
                     }
                 });
     }
@@ -58,7 +60,8 @@ public class SqliteAndXlsUtils  {
         new SQLiteToExcel.Builder(BookApplication.mInstance)
                 .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
                 .setOutputPath(MainActivity.OUTPATH)
-//                .setTables("BookType")
+                .setOutputFileName("book_backup.xls")
+                .setTables("bookType","book")
                 //                .setEncryptKey("1234567")
                 //                .setProtectKey("9876543")
                 .start(new SQLiteToExcel.ExportListener() {
@@ -68,7 +71,6 @@ public class SqliteAndXlsUtils  {
 
                     @Override
                     public void onCompleted(String filePath) {
-                        Log.d("=mmc=", "Export completed--->" + filePath);
                         Toast.show("保存在："+filePath);
                     }
 
