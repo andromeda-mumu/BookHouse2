@@ -83,36 +83,8 @@ public class SqliteAndXlsUtils  {
                     public void onError(Exception e) {
                     }
                 });
-
-//       saveTable("Book","select * from Book");
-//       saveTable("BookType","select * from BookType");
     }
 
-    public static void saveTable(String tableName,String sql){
-        new SQLiteToExcel.Builder(BookApplication.mInstance)
-                .setDataBase(BookApplication.mInstance.getDatabasePath("BookDatabase.db").getPath())
-                .setOutputPath(MainActivity.OUTPATH)
-                .setOutputFileName("book_backup.xls")
-                .setTables("Book")
-                .setSQL(tableName,sql)
-                //                .setEncryptKey("1234567")
-                //                .setProtectKey("9876543")
-                .start(new SQLiteToExcel.ExportListener() {
-                    @Override
-                    public void onStart() {
-                    }
-
-                    @Override
-                    public void onCompleted(String filePath) {
-                        Toast.show("保存在："+filePath);
-                        EventBusUtils.post(EventType.UPDATE_BOOK);
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                    }
-                });
-    }
     public static void showDbMsg(String dbName) {
         SQLiteDatabase database;
         try {
