@@ -20,15 +20,17 @@ public class Book extends BaseModel implements Serializable{
     @Column
     public String name;
     @Column
-    public String author;
+    public String type;
     @Column
     public String location;
     @Column
+    public String tag;
+    @Column
+    public String ownership;
+    @Column
     public String desc;
     @Column
-    public String type;
-    @Column
-    public String tag;
+    public String author;
     @Column
     public String date;
     @Column

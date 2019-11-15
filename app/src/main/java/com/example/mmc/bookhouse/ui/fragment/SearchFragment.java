@@ -15,6 +15,7 @@ import com.example.mmc.bookhouse.model.Book;
 import com.example.mmc.bookhouse.model.Book_Table;
 import com.example.mmc.bookhouse.ui.activity.BookDetailActivity;
 import com.example.mmc.bookhouse.ui.base.BaseFragment;
+import com.example.mmc.bookhouse.utils.Toast;
 import com.example.mmc.bookhouse.utils.Tools;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
@@ -67,6 +68,9 @@ public class SearchFragment extends BaseFragment {
         mDatas = SQLite.select()
                 .from(Book.class)
                 .queryList();
+        if(!Tools.isEmpty(mDatas)){
+            Toast.show("总共录入了"+mDatas.size()+"本书");
+        }
 
         mAdapter = new SearchAdapter(activity(), mDatas);
         mListview.setAdapter(mAdapter);
