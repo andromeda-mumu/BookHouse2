@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+def releaseTime() {
+    return new Date().format("yyyy_MMdd_HHmm")
+}
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -24,6 +27,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //项目摘抄
+//    android.applicationVariants.all { variant ->
+//        variant.outputs.all {
+//            outputFileName = "wanzi_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+//        }
+//    }
+//    //统一版本
+//    configurations.all {
+//        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//            def requested = details.requested
+//            if (requested.group == 'com.android.support') {
+//                if (!requested.name.startsWith("multidex")) {
+//                    details.useVersion '25.2.0'
+//                }
+//            }
+//        }
+//    }
 }
 def dbFlow_version = "4.2.4"
 
@@ -58,6 +78,18 @@ dependencies {
     implementation ('com.yanzhenjie.recyclerview:support:1.3.2'){
         exclude group: 'com.android.support',module:'recyclerview-v7'
     }
+
+    //rxjava=retrofit
+    compile  deps.rxjava
+    compile deps.retrofit
+    compile deps.converter_scalars
+    compile deps.converter_gson
+    compile deps.adapter_rxjava2
+    compile deps.retrofit2_rxjava2_adapter
+    compile deps.rxandroid
+    compile deps.log
+    compile deps.rxlifecycle
+    compile deps.rxlifecycle_components
 }
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"

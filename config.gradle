@@ -1,0 +1,122 @@
+ext.deps =[:]
+
+def versions =[:]
+versions.android_gradle_plugin = "3.0.1"
+versions.support ="25.2.0"
+versions.constraintLayout = "1.0.2"
+versions.okhttp = "3.8.0"
+versions.okio = "1.8.0"
+versions.greendao_gradle_plugin = "3.1.0"
+versions.butterknife_gradle_plugin ="8.4.0"
+versions.okhttp ="3.8.0"
+versions.okio ="1.8.0"
+versions.glide ="3.7.0"
+versions.glide_compiler ="4.5.0"
+versions.nineoldandroids ="2.4.0"
+versions.eventbus ="3.0.0"
+versions.circleimageview ="2.0.0"
+versions.butterknife_compiler ="8.4.0"
+versions.hlistview ="1.2.2"
+versions.autofittextview ="0.2.+"
+versions.getui ="2.12.5.0"
+versions.permissiongen ="0.0.6"
+versions.SwipeToLoadLayout ="1.0.4"
+versions.rvadapter ="3.0.3"
+versions.htextview_library ="0.1.5"
+versions.viewanimator ="1.0.4"
+versions.convenientbanner ="2.0.5"
+versions.jumpingbeans ="1.3.0"
+versions.rebound ="0.3.8"
+versions.greendao ="3.1.0"
+versions.pickerView ="3.2.6"
+versions.blurry ="2.1.1"
+versions.multidex ="1.0.3"
+versions.countdownview ="2.1.6"
+versions.SpEditTool ="0.2.3"
+versions.ultraviewpager ="1.0.7.7@aar"
+versions.switch_button ="0.0.3"
+versions.constraint = "1.0.2"
+versions.rxjava2Version = "2.0.8"
+versions.retrofit2Version = "2.2.0"
+versions.rxlifecycle="2.1.0"
+versions.rxjava_adapter = "1.0.0"
+versions.rxandroid ="2.0.1"
+versions.logging ="3.4.1"
+
+
+def deps =[:]
+
+def support = [:]
+support.design =  "com.android.support:design:$versions.support"
+support.gridlayout= "com.android.support:gridlayout-v7:$versions.support"
+support.v4 ="com.android.support:support-v4:$versions.support"
+deps.support = support
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.greendao_gradle_plugin = "org.greenrobot:greendao-gradle-plugin:$versions.greendao_gradle_plugin"
+deps.butterknife_gradle_plufin = "com.jakewharton:butterknife-gradle-plugin:$versions.butterknife_gradle_plugin"
+deps.constraint ="com.android.support.constraint:constraint-layout:$versions.constraint"
+deps.okhttp = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+deps.okio ="com.squareup.okio:okio:$versions.okio"
+deps.glide ="com.github.bumptech.glide:glide:$versions.glide"
+deps.glide_compiler ="com.github.bumptech.glide:compiler:$versions.glide_compiler"
+deps.nineoldandroids ="com.nineoldandroids:library:$versions.nineoldandroids"
+deps.eventbus ="org.greenrobot:eventbus:$versions.eventbus"
+deps.circleimageview ="de.hdodenhof:circleimageview:$versions.circleimageview"
+deps.butterknife_compiler ="com.jakewharton:butterknife-compiler:$versions.butterknife_compiler"
+deps.horizontallistview ="it.sephiroth.android.library.horizontallistview:hlistview:$versions.hlistview"
+deps.autofittextview ="me.grantland:autofittextview:$versions.autofittextview"
+deps.getui="com.getui:sdk:$versions.getui"
+deps.permissiongen ="com.lovedise:permissiongen:$versions.permissiongen"
+deps.SwipeToLoadLayout ="com.github.Aspsine:SwipeToLoadLayout:$versions.SwipeToLoadLayout"
+deps.base_rvadapter ="com.zhy:base-rvadapter:$versions.rvadapter"
+deps.htextview_library ="hanks.xyz:htextview-library:$versions.htextview_library"
+deps.viewanimator ="com.github.florent37:viewanimator:$versions.viewanimator"
+deps.convenientbanner ="com.bigkoo:convenientbanner:$versions.convenientbanner"
+deps.jumpingbeans ="net.frakbot:jumpingbeans:$versions.jumpingbeans"
+deps.switch_button ="com.github.zcweng:switch-button:$versions.switch_button@aar"
+deps.rebound ="com.facebook.rebound:rebound:$versions.rebound"
+deps.greendao ="org.greenrobot:greendao:$versions.greendao"
+deps.greendao_generator ="org.greenrobot:greendao-generator:$versions.greendao"
+deps.pickerView ="com.contrarywind:Android-PickerView:$versions.pickerView"
+deps.blurry ="jp.wasabeef:blurry:$versions.blurry"
+deps.multidex ="com.android.support:multidex:$versions.multidex"
+deps.ultraviewpager ="com.alibaba.android:ultraviewpager:$versions.ultraviewpager"
+deps.countdownview ="com.github.iwgang:countdownview:$versions.countdownview"
+deps.SpEditTool ="com.github.sunhapper:SpEditTool:$versions.SpEditTool"
+
+deps.rxjava="io.reactivex.rxjava2:rxjava:$versions.rxjava2Version"
+deps.retrofit="com.squareup.retrofit2:retrofit:$versions.retrofit2Version"
+deps.converter_scalars = "com.squareup.retrofit2:converter-scalars:$versions.retrofit2Version"
+deps.converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit2Version"
+deps.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit2Version"
+deps.retrofit2_rxjava2_adapter= "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$versions.rxjava_adapter"
+deps.rxandroid = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+deps.log = "com.squareup.okhttp3:logging-interceptor:$versions.logging"
+deps.rxlifecycle =  "com.trello.rxlifecycle2:rxlifecycle:$versions.rxlifecycle"
+deps.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:$versions.rxlifecycle"
+
+
+ext.deps = deps
+def build_version = [:]
+build_version.min_sdk =16
+build_version.target_sdk =27
+build_version.compile_sdk =28
+build_version.build_tools ="28.0.0"
+build_version.version_code = 61
+build_version.version_name = "1.6.1"
+
+ext.build_version = build_version
+
+def addRepos(RepositoryHandler handler){
+    handler.maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+//    handler.google()
+    handler.mavenCentral()
+    handler.jcenter()
+    handler.maven { url 'https://dl.bintray.com/umsdk/release' }//友盟
+    handler.maven {url "https://jitpack.io"}
+    handler.maven {url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"}
+}
+ext.addRepos = this.&addRepos
+
+
